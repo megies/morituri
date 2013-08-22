@@ -102,16 +102,15 @@ class WavpackProfile(Profile):
 class MP3Profile(Profile):
     name = 'mp3'
     extension = 'mp3'
-    pipeline = 'lame name=tagger quality=0 ! id3v2mux'
+    pipeline = 'lamemp3enc name=tagger target=bitrate cbr=true bitrate=320 ' \
+               '! xingmux ! id3v2mux'
     lossless = False
 
 
 class MP3VBRProfile(Profile):
     name = 'mp3vbr'
     extension = 'mp3'
-    pipeline = 'lame name=tagger ' \
-               'vbr-quality=0 vbr=new vbr-mean-bitrate=192 ! ' \
-               'id3v2mux'
+    pipeline = 'lamemp3enc name=tagger quality=0 ! xingmux ! id3v2mux'
     lossless = False
 
 
